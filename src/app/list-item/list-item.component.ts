@@ -1,40 +1,43 @@
-import { Component, OnInit } from '@angular/core';
-import {ItemsService} from './items.service';
-import {Observable} from 'rxjs';
+import {Component, OnInit} from '@angular/core';
+import {ListItemService} from './list-item.service';
+import {Item} from './shared/item.model';
+import {UtilsService} from '../core/utils';
 
 @Component({
   selector: 'app-list-item',
   templateUrl: './list-item.component.html'
 })
 export class ListItemComponent implements OnInit {
-  public itemsData;
-  public itemsModels;
-  public itemsColors;
-  constructor(
-    private itemsService: ItemsService,
-    ) { }
 
-  ngOnInit() {
-    this.itemsService.getJSON().subscribe(data => {
-      this.itemsData = data;
-      let modelsArr = [];
-      let modelsColors = [];
-      data.forEach(function (e) {
-        modelsArr.push(e['model']);
-        if (e['color'] === 'Fuscia') {
-          modelsColors.push('Fuchsia');
-        } else if (e['color'] === 'Mauv') {
-          modelsColors.push('Mauve');
-        } else {
-          modelsColors.push(e['color']);
-        }
+  public itemsData: Item[] = [];
+  public itemsModels: string[] = [];
+  public itemsColors: string[] = [];
 
-      });
-      modelsArr = modelsArr.filter((el, i, a) => i === a.indexOf(el));
-      modelsColors = modelsColors.filter((el, i, a) => i === a.indexOf(el));
-      this.itemsModels = modelsArr;
-      this.itemsColors = modelsColors;
-    });
+  constructor(private itemsService: ListItemService,
+              private utils: UtilsService) {
+  }
 
+  async ngOnInit() {
+    this.itemsData = await this.itemsService.getJSON().toPromise();
+    this.itemsData.forEach(item => this.formatItems(item));
+
+    this.itemsModels = this.utils.uniqArray(this.itemsModels);
+    this.itemsColors = this.utils.uniqArray(this.itemsColors);
+  }
+
+  public formatItems(item: Item) {
+    this.itemsModels.push(item.model);
+
+    if (item.color === 'Fuscia') {
+      this.itemsColors.push('Fuchsia');
+      return;
+    }
+
+    if (item.color === 'Mauv') {
+      this.itemsColors.push('Mauve');
+      return;
+    }
+
+    this.itemsColors.push(item.color);
   }
 }

@@ -1,5 +1,5 @@
 import {Component, Input, OnInit, HostBinding} from '@angular/core';
-import {Item} from '../item.model';
+import {Item} from '../shared/item.model';
 
 @Component({
   selector: 'app-item',
@@ -7,8 +7,9 @@ import {Item} from '../item.model';
 })
 export class ItemComponent implements OnInit {
   @Input() item: Item;
-  @HostBinding('attr.class') cssClass = 'item';
-  constructor() { }
+
+  constructor() {
+  }
 
   ngOnInit() {
   }
