@@ -1,0 +1,20 @@
+.items-list {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  margin: 0 0 -24px 0;
+  .item {
+    width: calc(33% - 6px);
+    margin-bottom: 12px;
+    img {
+      max-height: 150px;
+    }
+  }
+}
+.model-list {
+
+}
+.model-name {
+  margin-right: 4px;
+  cursor: pointer;
+}

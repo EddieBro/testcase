@@ -1,1 +1,16 @@
-/* You can add global styles to this file, and also import other style files */
+.items-list {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  margin: 0 0 -24px 0; }
+  .items-list .item {
+    width: calc(33% - 6px);
+    margin-bottom: 12px; }
+    .items-list .item img {
+      max-height: 150px; }
+
+.model-name {
+  margin-right: 4px;
+  cursor: pointer; }
+
+/*# sourceMappingURL=styles.css.map */

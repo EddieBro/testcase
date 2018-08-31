@@ -1,0 +1,26 @@
+<div class="container">
+  <h1>Список</h1>
+  <div class="row">
+    <div class="col-3">
+      <h4>Фильтр по марке</h4>
+      <div class="model-list">
+        <ng-container *ngFor="let model of this.itemsModels">
+          <div class="model-name badge badge-info">{{ model }}</div>
+        </ng-container>
+      </div>
+    </div>
+    <div class="col-9">
+      <div class="color-list">
+        <h4>Цвета автомобилей</h4>
+        <ng-container *ngFor="let color of this.itemsColors">
+          <div class="badge" [style.backgroundColor]="color">{{ color }}</div>
+        </ng-container>
+      </div>
+      <div class="items-list">
+        <ng-container *ngFor="let item of this.itemsData">
+          <app-item [item]="item"></app-item>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>
