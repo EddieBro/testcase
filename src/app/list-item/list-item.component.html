@@ -3,8 +3,9 @@
   <div class="row">
     <div class="col-3">
       <h4>Фильтр по марке</h4>
+      <input type="text" #inputFilter (input)="filter(inputFilter.value)">
       <div class="model-list">
-        <ng-container *ngFor="let model of this.itemsModels">
+        <ng-container *ngFor="let model of itemsModels">
           <div class="model-name badge badge-info">{{ model }}</div>
         </ng-container>
       </div>
@@ -12,12 +13,12 @@
     <div class="col-9">
       <div class="color-list">
         <h4>Цвета автомобилей</h4>
-        <ng-container *ngFor="let color of this.itemsColors">
+        <ng-container *ngFor="let color of filteredColors">
           <div class="badge" [style.backgroundColor]="color">{{ color }}</div>
         </ng-container>
       </div>
       <div class="items-list">
-        <ng-container *ngFor="let item of this.itemsData">
+        <ng-container *ngFor="let item of itemsData">
           <app-item [item]="item" class="item"></app-item>
         </ng-container>
       </div>

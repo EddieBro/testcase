@@ -13,6 +13,8 @@ export class ListItemComponent implements OnInit {
   public itemsModels: string[] = [];
   public itemsColors: string[] = [];
 
+  public filteredColors: string[] = [];
+
   constructor(private itemsService: ListItemService,
               private utils: UtilsService) {
   }
@@ -22,7 +24,14 @@ export class ListItemComponent implements OnInit {
     this.itemsData.forEach(item => this.formatItems(item));
 
     this.itemsModels = this.utils.uniqArray(this.itemsModels);
-    this.itemsColors = this.utils.uniqArray(this.itemsColors);
+
+    this.filteredColors = this.utils.uniqArray(this.itemsColors);
+    this.itemsColors = this.filteredColors;
+
+  }
+
+  public filter(filterText) {
+    this.filteredColors = this.itemsColors.filter(value => value.includes(filterText));
   }
 
   public formatItems(item: Item) {
