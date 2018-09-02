@@ -10,10 +10,10 @@ import {UtilsService} from '../core/utils';
 export class ListItemComponent implements OnInit {
 
   public itemsData: Item[] = [];
-  public itemsModels: string[] = [];
+  public itemsFiltered: Items[] = [];
+  public itemsMarks: string[] = [];
   public itemsColors: string[] = [];
 
-  public filteredColors: string[] = [];
 
   constructor(private itemsService: ListItemService,
               private utils: UtilsService) {
@@ -22,20 +22,19 @@ export class ListItemComponent implements OnInit {
   async ngOnInit() {
     this.itemsData = await this.itemsService.getJSON().toPromise();
     this.itemsData.forEach(item => this.formatItems(item));
+    this.itemsFiltered = this.itemsData;
+    this.itemsMarks = this.utils.uniqArray(this.itemsMarks);
 
-    this.itemsModels = this.utils.uniqArray(this.itemsModels);
-
-    this.filteredColors = this.utils.uniqArray(this.itemsColors);
-    this.itemsColors = this.filteredColors;
+    this.itemsColors = this.utils.uniqArray(this.itemsColors);
 
   }
 
   public filter(filterText) {
-    this.filteredColors = this.itemsColors.filter(value => value.includes(filterText));
+    console.log('yo!', filterText);
   }
 
   public formatItems(item: Item) {
-    this.itemsModels.push(item.model);
+    this.itemsMarks.push(item.make);
 
     if (item.color === 'Fuscia') {
       this.itemsColors.push('Fuchsia');
@@ -48,5 +47,13 @@ export class ListItemComponent implements OnInit {
     }
 
     this.itemsColors.push(item.color);
+  }
+
+  public filterMark(mark) {
+    this.itemsFiltered = this.itemsData.filter(element => {
+      return element['make'] === mark;
+    });
+
+    //console.log(test);
   }
 }

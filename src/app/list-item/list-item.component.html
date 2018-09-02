@@ -3,22 +3,27 @@
   <div class="row">
     <div class="col-3">
       <h4>Фильтр по марке</h4>
-      <input type="text" #inputFilter (input)="filter(inputFilter.value)">
       <div class="model-list">
-        <ng-container *ngFor="let model of itemsModels">
-          <div class="model-name badge badge-info">{{ model }}</div>
+        <ng-container *ngFor="let mark of itemsMarks">
+          <div class="model-name badge badge-info" (click)="filterMark(mark)">{{ mark }}</div>
         </ng-container>
       </div>
     </div>
     <div class="col-9">
+      <div class="search-block">
+        <h4>Поиск по всему</h4>
+        <input type="text" #inputFilter (input)="filter(inputFilter.value)">
+      </div>
       <div class="color-list">
-        <h4>Цвета автомобилей</h4>
-        <ng-container *ngFor="let color of filteredColors">
+        <h4>Фильтр по цвету</h4>
+        <ng-container *ngFor="let color of itemsColors">
           <div class="badge" [style.backgroundColor]="color">{{ color }}</div>
         </ng-container>
       </div>
+
+      <h3>Список объектов с json</h3>
       <div class="items-list">
-        <ng-container *ngFor="let item of itemsData">
+        <ng-container *ngFor="let item of itemsFiltered">
           <app-item [item]="item" class="item"></app-item>
         </ng-container>
       </div>
