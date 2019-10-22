@@ -1,1 +1,16 @@
-<app-list-item></app-list-item>
+<div class="container">
+  <ul class="nav nav-pills">
+    <li class="nav-item">
+      <a class="nav-link" [routerLink]="['/home']" routerLinkActive="active">Home</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" [routerLink]="['/about']" routerLinkActive="active">About</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" [routerLink]="['/poe']" routerLinkActive="active">Path of Exile</a>
+    </li>
+  </ul>
+  <router-outlet></router-outlet>
+</div>
+
+

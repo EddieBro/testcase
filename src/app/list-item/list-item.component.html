@@ -3,6 +3,7 @@
   <div class="row">
     <div class="col-3">
       <h4>Фильтр по марке</h4>
+      <input type="button" value="Сбросить" (click)="filterClear()">
       <div class="model-list">
         <ng-container *ngFor="let mark of itemsMarks">
           <div class="model-name badge badge-info" (click)="filterMark(mark)">{{ mark }}</div>
@@ -17,7 +18,7 @@
       <div class="color-list">
         <h4>Фильтр по цвету</h4>
         <ng-container *ngFor="let color of itemsColors">
-          <div class="badge" [style.backgroundColor]="color">{{ color }}</div>
+          <div [class.dummy]="color == 'empty'" class="badge" [style.backgroundColor]="color" (click)="filterColor(color)">{{ color }}</div>
         </ng-container>
       </div>
 

@@ -10,9 +10,9 @@ import {UtilsService} from '../core/utils';
 export class ListItemComponent implements OnInit {
 
   public itemsData: Item[] = [];
-  public itemsFiltered: Items[] = [];
+  public itemsFiltered: Item[] = [];
   public itemsMarks: string[] = [];
-  public itemsColors: string[] = [];
+  public itemsColors: string[] = ['empty', 'empty', 'empty', 'empty'];
 
 
   constructor(private itemsService: ListItemService,
@@ -30,7 +30,7 @@ export class ListItemComponent implements OnInit {
   }
 
   public filter(filterText) {
-    console.log('yo!', filterText);
+    this.filterMark(filterText);
   }
 
   public formatItems(item: Item) {
@@ -49,11 +49,22 @@ export class ListItemComponent implements OnInit {
     this.itemsColors.push(item.color);
   }
 
-  public filterMark(mark) {
+  public filterColor(color) {
     this.itemsFiltered = this.itemsData.filter(element => {
-      return element['make'] === mark;
+      return element.color === color;
     });
+  }
 
-    //console.log(test);
+  public filterMark(mark) {
+    if (mark === '') {
+      return this.itemsFiltered;
+    }
+    this.itemsFiltered = this.itemsData.filter(element => {
+      return element.make === mark;
+    });
+  }
+
+  public filterClear() {
+    this.itemsFiltered = this.itemsData;
   }
 }
